@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="@dimen/main_app_bar_container_height"
+  android:background="@drawable/background_image"
+  android:orientation="vertical">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/dimen_spacing"
+    android:paddingTop="@dimen/main_app_bar_top_spacing">
+
+    <TextView
+      android:id="@+id/tvAppBarTitle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/dimen_spacing__xs"
+      android:text="@string/app_name"
+      android:textAlignment="center"
+      android:textSize="@dimen/main_app_bar_title" />
+
+    <EditText
+      android:id="@+id/edtSearch"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/search_box_height"
+      android:autofillHints=""
+      android:background="@drawable/background_search_box"
+      android:drawableStart="@drawable/ic_baseline_search_24"
+      android:drawablePadding="2dp"
+      android:hint="@string/search_text_placeholder"
+      android:paddingHorizontal="@dimen/dimen_spacing"
+      android:textColor="@color/colorTextSecondary"
+      android:textColorHint="@color/colorTextSecondary"
+      android:textSize="@dimen/dimen_search_box_text_size"
+      android:maxLines="1"
+      />
+  </LinearLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/border_size"
+    android:background="@drawable/background_app_gradient" />
+</LinearLayout>

@@ -9,10 +9,19 @@ fun moveReducer(action: Action, moveState: MoveState?): MoveState {
 
   when (action) {
     is MoveAction.UPDATE_TOTAL ->
-      _moveState.total = action.total
+      _moveState = _moveState.copy(
+        total = action.total
+      )
 
     is MoveAction.UPDATE_LIST_MOVES ->
-      _moveState.moves = action.moves
+      _moveState = _moveState.copy(
+        moves = action.moves
+      )
+    is MoveAction.UPDATE_STATE ->
+      _moveState = _moveState.copy(
+        total = action.state.total,
+        moves = action.state.moves
+      )
   }
 
   return _moveState
