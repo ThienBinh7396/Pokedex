@@ -1,12 +1,11 @@
-package com.example.pokedexapplication.Adapter.ViewPager
+package com.example.pokedexapplication.adapter.ViewPager
 
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.pokedexapplication.Fragment.ItemsFragment
-import com.example.pokedexapplication.Fragment.MovesFragment
-import com.example.pokedexapplication.Fragment.PokemonFragment
+import com.example.pokedexapplication.fragment.ItemsFragment
+import com.example.pokedexapplication.fragment.MovesFragment
+import com.example.pokedexapplication.fragment.PokemonFragment
 import com.example.pokedexapplication.R
 
 data class MainNavTabData(

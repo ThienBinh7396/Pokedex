@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/pokemon_type_item"
+  android:layout_width="wrap_content"
+  android:layout_height="match_parent"
+  android:layout_gravity="center_vertical">
+
+  <ImageView
+    android:id="@+id/imvPokemonType"
+    android:layout_width="@dimen/dimen_pokemon_recycleview_image_pokemon_type_size"
+    android:layout_height="@dimen/dimen_pokemon_recycleview_image_pokemon_type_size"
+    android:layout_gravity="center_vertical" />
+</LinearLayout>

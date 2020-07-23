@@ -2,21 +2,13 @@ package com.example.pokedexapplication
 
 import android.os.Build
 import android.os.Bundle
-import android.transition.Slide
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.Window
-import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
-import android.widget.TableLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.pokedexapplication.Adapter.ViewPager.MainViewPagerAdapter
-import com.example.pokedexapplication.Store.State.ItemState
+import com.example.pokedexapplication.adapter.ViewPager.MainViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
-import org.rekotlin.StoreSubscriber
 
 class MainActivity : AppCompatActivity() {
   private lateinit var mMainViewPagerAdapter: MainViewPagerAdapter

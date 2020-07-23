@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+
+    <import type="android.view.View" />
+
+    <variable
+      name="mPokemonViewModel"
+      type="com.example.pokedexapplication.viewModel.PokemonViewModel" />
+
+    <variable
+      name="mPokemonTypeViewModel"
+      type="com.example.pokedexapplication.viewModel.PokemonTypeViewModel"  />
+  </data>
+
+  <LinearLayout
+    android:id="@+id/pokemon_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/dimen_spacing">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingVertical="@dimen/dimen_spacing__sm">
+
+      <ImageView
+        android:id="@+id/imvPokemonImage"
+        android:layout_width="@dimen/dimen_pokemon_recycleview_image_pokemon_size"
+        android:layout_height="@dimen/dimen_pokemon_recycleview_image_pokemon_size"
+        android:layout_marginEnd="@dimen/dimen_spacing__sm"
+        app:bindImageSrc="@{mPokemonViewModel.image}" />
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/tvPokemonName"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@{mPokemonViewModel.name}"
+          android:textColor="@color/colorTextSecondary"
+          android:textSize="@dimen/dimen_pokemon_recycleview_name_font" />
+
+        <TextView
+          android:id="@+id/tvPokemonId"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@{mPokemonViewModel.id}"
+          android:textColor="@color/colorTextThird"
+          android:textSize="@dimen/dimen_pokemon_recycleview_id_font" />
+      </LinearLayout>
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvPokemonType"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/colorRecyclerViewBorder" />
+  </LinearLayout>
+</layout>

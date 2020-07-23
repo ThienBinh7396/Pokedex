@@ -14,4 +14,7 @@
 
   <color name="colorTextPrimary">#000</color>
   <color name="colorTextSecondary">#4f4f4f</color>
+  <color name="colorTextThird">#a4a4a4</color>
+
+  <color name="colorRecyclerViewBorder">#e3e3e3</color>
 </resources>
