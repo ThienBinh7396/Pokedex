@@ -15,8 +15,10 @@ import com.example.pokedexapplication.viewModel.PokemonFragmentViewModel
 import com.example.pokedexapplication.viewModel.PokemonTypeViewModel
 import com.example.pokedexapplication.viewModel.PokemonViewModel
 
-class PokemonItemAdapter(var pokemonList: MutableList<Pokemon>) :
+class PokemonItemAdapter :
   RecyclerView.Adapter<PokemonItemAdapter.PokemonItemViewHolder>() {
+  private var pokemonList: MutableList<Pokemon> = mutableListOf()
+
   class PokemonItemViewHolder(var mPokemonItemBinding: PokemonItemBinding) :
     RecyclerView.ViewHolder(
       mPokemonItemBinding.pokemonItem
@@ -51,7 +53,7 @@ class PokemonItemAdapter(var pokemonList: MutableList<Pokemon>) :
     return PokemonItemViewHolder(mPokemonItemBinding)
   }
 
-  override fun getItemCount(): Int = pokemonList.size
+  override fun getItemCount() = pokemonList.size
 
   override fun onBindViewHolder(holder: PokemonItemViewHolder, position: Int) {
     holder.bindPokemonItem(pokemonList[position])
@@ -59,7 +61,7 @@ class PokemonItemAdapter(var pokemonList: MutableList<Pokemon>) :
 
   fun updatePokemonList(_pokemonList: MutableList<Pokemon>, refresh: Boolean = true) {
     if (refresh) pokemonList.clear()
-    _pokemonList.addAll(_pokemonList)
+    pokemonList.addAll(_pokemonList.toList())
     notifyDataSetChanged()
   }
 

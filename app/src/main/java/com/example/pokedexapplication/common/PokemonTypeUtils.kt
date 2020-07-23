@@ -3,7 +3,7 @@ package com.example.pokedexapplication.common
 import com.example.pokedexapplication.R
 
 class PokemonTypeUtils {
-  companion object{
+  companion object {
     val POKEMON_TYPE = mapOf<String, Int>(
       "BUG" to R.drawable.bug,
       "DARK" to R.drawable.dark,
@@ -11,6 +11,7 @@ class PokemonTypeUtils {
       "ELECTRIC" to R.drawable.electric,
       "FAIRY" to R.drawable.fairy,
       "FIGHT" to R.drawable.fight,
+      "FIGHTING" to R.drawable.fight,
       "FIRE" to R.drawable.fire,
       "FLYING" to R.drawable.flying,
       "GHOST" to R.drawable.ghost,

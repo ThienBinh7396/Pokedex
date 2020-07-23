@@ -61,6 +61,6 @@ class SplashActivity : AppCompatActivity(), StoreSubscriber<AppState?> {
         startActivity(this)
         finish()
       }
-    }, 2500)
+    }, 500)
   }
 }

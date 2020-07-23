@@ -68,6 +68,8 @@ class PokemonFragment : Fragment(), StoreSubscriber<PokemonState> {
   override fun onDestroy() {
     super.onDestroy()
 
+    Log.d("Binh", "Destroy ${store.state.pokemonState.pokemons.size}")
+
     store.unsubscribe(this)
   }
 

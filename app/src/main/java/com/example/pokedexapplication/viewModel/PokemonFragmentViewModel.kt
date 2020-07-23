@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedexapplication.adapter.RecyclerView.PokemonItemAdapter
 import com.example.pokedexapplication.Model.Pokemon
 
-class PokemonFragmentViewModel() : BaseObservable() {
+class PokemonFragmentViewModel : BaseObservable() {
   private var mPokemonList = ObservableArrayList<MutableList<Pokemon>>()
 
   fun setPokemonList(mPokemonList: MutableList<Pokemon>) {
@@ -23,14 +23,17 @@ class PokemonFragmentViewModel() : BaseObservable() {
   companion object {
     @BindingAdapter("app:bindPokemonData")
     @JvmStatic
-    fun setBindPokemonData(rcvPokemon: RecyclerView, pokemons: ObservableArrayList<MutableList<Pokemon>>) {
-      if (rcvPokemon.adapter == null) {
-        Log.d("Binh", "Model1: ${pokemons[0].size}")
-        rcvPokemon.adapter = PokemonItemAdapter(pokemonList = pokemons[0])
-      } else {
-        Log.d("Binh", "Model: ${pokemons[0].size}")
-        (rcvPokemon.adapter as PokemonItemAdapter).updatePokemonList(pokemons[0])
+    fun setBindPokemonData(
+      rcvPokemon: RecyclerView,
+      pokemons: ObservableArrayList<MutableList<Pokemon>>
+    ) {
+      val adapter =
+        if (rcvPokemon.adapter == null) PokemonItemAdapter() else (rcvPokemon.adapter as PokemonItemAdapter)
+
+      if (rcvPokemon.adapter  == null) {
+        rcvPokemon.adapter = adapter
       }
+      adapter.updatePokemonList(pokemons[0])
     }
   }
 

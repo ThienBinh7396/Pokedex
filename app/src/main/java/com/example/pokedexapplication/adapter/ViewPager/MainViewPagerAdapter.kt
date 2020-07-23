@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.pokedexapplication.fragment.ItemsFragment
-import com.example.pokedexapplication.fragment.MovesFragment
+import com.example.pokedexapplication.fragment.MoveFragment
 import com.example.pokedexapplication.fragment.PokemonFragment
 import com.example.pokedexapplication.R
 
@@ -29,7 +29,7 @@ class MainViewPagerAdapter(
   override fun getItem(position: Int): Fragment {
     return when (position) {
       1 ->
-        MovesFragment()
+        MoveFragment()
       2 ->
         ItemsFragment()
       else ->
