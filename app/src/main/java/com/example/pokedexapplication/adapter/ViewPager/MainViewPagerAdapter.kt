@@ -1,5 +1,6 @@
 package com.example.pokedexapplication.adapter.ViewPager
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -27,6 +28,8 @@ class MainViewPagerAdapter(
   }
   
   override fun getItem(position: Int): Fragment {
+    Log.d("Binh", "POSITION: $position")
+
     return when (position) {
       1 ->
         MoveFragment()

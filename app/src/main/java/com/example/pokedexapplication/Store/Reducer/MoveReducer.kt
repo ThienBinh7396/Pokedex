@@ -22,6 +22,10 @@ fun moveReducer(action: Action, moveState: MoveState?): MoveState {
         total = action.state.total,
         moves = action.state.moves
       )
+    is MoveAction.UPDATE_MOVES_LOADING_STATE ->
+      _moveState = _moveState.copy(
+        isLoadingMoves = action.isLoadingMoves
+      )
   }
 
   return _moveState

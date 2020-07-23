@@ -10,6 +10,11 @@
       name="mPokemonViewModel"
       type="com.example.pokedexapplication.viewModel.PokemonViewModel" />
 
+
+    <variable
+      name="mPokemonItemEventListener"
+      type="com.example.pokedexapplication.adapter.RecyclerView.PokemonItemAdapter.PokemonItemEventListener" />
+
     <variable
       name="mPokemonTypeViewModel"
       type="com.example.pokedexapplication.viewModel.PokemonTypeViewModel"  />
@@ -20,7 +25,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingHorizontal="@dimen/dimen_spacing">
+    android:paddingHorizontal="@dimen/dimen_spacing"
+    app:bindPokemonSelectedBackground="@{mPokemonViewModel.isSelected}"
+    android:focusable="true"
+    android:clickable="true"
+    android:onClick="@{() -> mPokemonItemEventListener.onItemClickListener(mPokemonViewModel.position, mPokemonViewModel.id)}">
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -31,7 +40,7 @@
         android:id="@+id/imvPokemonImage"
         android:layout_width="@dimen/dimen_pokemon_recycleview_image_pokemon_size"
         android:layout_height="@dimen/dimen_pokemon_recycleview_image_pokemon_size"
-        android:layout_marginEnd="@dimen/dimen_spacing__sm"
+        android:layout_marginEnd="@dimen/dimen_spacing__md"
         app:bindImageSrc="@{mPokemonViewModel.image}" />
 
       <LinearLayout
@@ -52,7 +61,7 @@
           android:id="@+id/tvPokemonId"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="@{mPokemonViewModel.id}"
+          android:text="@{mPokemonViewModel.idText}"
           android:textColor="@color/colorTextThird"
           android:textSize="@dimen/dimen_pokemon_recycleview_id_font" />
       </LinearLayout>
@@ -60,7 +69,9 @@
       <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvPokemonType"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:bindPokemonTypes="@{mPokemonViewModel.pokemonTypes}"
+        />
     </LinearLayout>
 
     <View

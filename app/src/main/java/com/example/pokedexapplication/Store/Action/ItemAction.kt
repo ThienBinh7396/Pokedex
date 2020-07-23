@@ -14,4 +14,6 @@ sealed class ItemAction : Action {
     var isSearching: Boolean = false,
     var isFirstFetch: Boolean = false
   ) : Action
+
+  class UPDATE_ITEM_LOADING_STATE(var isLoadingItems: Boolean): Action
 }

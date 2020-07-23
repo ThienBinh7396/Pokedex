@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/navContainer"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical">
-  <ImageView
-    android:id="@+id/imvIcon"
-    android:layout_width="@dimen/dimen_main_nav_tab_icon"
-    android:layout_height="@dimen/dimen_main_nav_tab_icon"
-    android:layout_gravity="center_horizontal"
-    android:scaleType="centerCrop"/>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <TextView
-    android:id="@+id/tvLabel"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:textSize="@dimen/dimen_main_nav_tab_label"
-    android:textColor="@color/colorMainNavTabDefault"/>
-</LinearLayout>
+  <data>
+
+    <variable
+      name="mMainNavTabLayoutViewModel"
+      type="com.example.pokedexapplication.viewModel.MainNavTabLayoutViewModel" />
+  </data>
+
+  <LinearLayout
+    android:id="@+id/navContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+      android:id="@+id/imvIcon"
+      android:layout_width="@dimen/dimen_main_nav_tab_icon"
+      android:layout_height="@dimen/dimen_main_nav_tab_icon"
+      android:layout_gravity="center_horizontal"
+      android:scaleType="centerCrop"
+      app:bindMainTabLayoutIcon="@{mMainNavTabLayoutViewModel}" />
+
+    <TextView
+      android:id="@+id/tvLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:textColor="@{mMainNavTabLayoutViewModel.isSelected ? @color/colorMainNavTabActive : @color/colorMainNavTabDefault}"
+      android:textSize="@dimen/dimen_main_nav_tab_label"
+      app:bindMainTabLayoutText="@{mMainNavTabLayoutViewModel.tabPosition}" />
+  </LinearLayout>
+</layout>

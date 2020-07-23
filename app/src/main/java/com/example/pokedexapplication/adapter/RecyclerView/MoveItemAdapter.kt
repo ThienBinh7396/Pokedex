@@ -41,10 +41,8 @@ class MoveItemAdapter : RecyclerView.Adapter<MoveItemAdapter.MoveItemViewHolder>
 
   fun updateMoveList(_moveList: MutableList<Move>, refresh: Boolean = true) {
     if (refresh) mMoveList.clear()
-    Log.d("Binh", "move list adap: ${_moveList.size}")
 
     mMoveList.addAll(_moveList)
     notifyDataSetChanged()
-
   }
 }

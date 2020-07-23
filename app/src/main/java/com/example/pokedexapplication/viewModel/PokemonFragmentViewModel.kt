@@ -7,18 +7,37 @@ import androidx.databinding.ObservableArrayList
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedexapplication.adapter.RecyclerView.PokemonItemAdapter
 import com.example.pokedexapplication.Model.Pokemon
+import com.example.pokedexapplication.store
 
 class PokemonFragmentViewModel : BaseObservable() {
   private var mPokemonList = ObservableArrayList<MutableList<Pokemon>>()
+
+  private var mSearchPokemonList = ObservableArrayList<MutableList<Pokemon>>()
+
+  private var isLoading = false
 
   fun setPokemonList(mPokemonList: MutableList<Pokemon>) {
     this.mPokemonList.addAll(0, listOf(mPokemonList))
     notifyChange()
   }
 
-  fun getPokemonList(): ObservableArrayList<MutableList<Pokemon>>? {
-    return this.mPokemonList
+  fun getPokemonList() = this.mPokemonList
+
+  fun setSearchPokemonList(mSearchPokemonList: MutableList<Pokemon>) {
+    this.mSearchPokemonList.addAll(0, listOf(mSearchPokemonList))
+    notifyChange()
   }
+
+  fun getSearchPokemonList() = this.mSearchPokemonList
+
+  fun setIsLoading(isLoading: Boolean) {
+    this.isLoading = isLoading
+    notifyChange()
+  }
+
+  fun getIsLoading() = this.isLoading
+
+  fun getTypeOfPokemonsIsSearchList() = store.state.appState.isSearching
 
   companion object {
     @BindingAdapter("app:bindPokemonData")
@@ -27,13 +46,9 @@ class PokemonFragmentViewModel : BaseObservable() {
       rcvPokemon: RecyclerView,
       pokemons: ObservableArrayList<MutableList<Pokemon>>
     ) {
-      val adapter =
-        if (rcvPokemon.adapter == null) PokemonItemAdapter() else (rcvPokemon.adapter as PokemonItemAdapter)
-
-      if (rcvPokemon.adapter  == null) {
-        rcvPokemon.adapter = adapter
+      if (rcvPokemon.adapter != null) {
+        (rcvPokemon.adapter as PokemonItemAdapter).updatePokemonList(pokemons[0])
       }
-      adapter.updatePokemonList(pokemons[0])
     }
   }
 

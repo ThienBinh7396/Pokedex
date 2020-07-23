@@ -10,7 +10,7 @@ import com.example.pokedexapplication.GlideApp
 import com.example.pokedexapplication.R
 import com.example.pokedexapplication.common.PokemonTypeUtils.Companion.POKEMON_TYPE
 
-class PokemonTypeItemAdapter() :
+class PokemonTypeItemAdapter :
   RecyclerView.Adapter<PokemonTypeItemAdapter.PokemonTypeViewHolder>() {
 
   private var typesOfPokemon: MutableList<String> = mutableListOf()
@@ -39,7 +39,9 @@ class PokemonTypeItemAdapter() :
     holder.bindPokemonTypeItem(typesOfPokemon[position])
   }
 
-  fun updatePokemonTypes(_pokemonTypes: MutableList<String>, refresh: Boolean = true) {
+  fun updatePokemonTypes(_pokemonTypes: MutableList<String>?, refresh: Boolean = true) {
+    if(_pokemonTypes == null) return
+
     if (refresh) typesOfPokemon.clear()
     typesOfPokemon.addAll(_pokemonTypes)
     notifyDataSetChanged()

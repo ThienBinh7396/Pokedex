@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#6200EE</color>
+  <color name="colorPrimary">#1CEDD9</color>
   <color name="colorPrimaryDark">#3700B3</color>
   <color name="colorAccent">#03DAC5</color>
   <color name="colorTransparent">#00000000</color>
-  <color name="colorMainStatusBar">#131313ba</color>
+  <color name="colorMainStatusBar">#131313</color>
   <color name="colorBackground">#fafafa</color>
 
   <color name="colorMainNavTabDefault">#9fada6</color>
@@ -17,4 +17,6 @@
   <color name="colorTextThird">#a4a4a4</color>
 
   <color name="colorRecyclerViewBorder">#e3e3e3</color>
+  <color name="colorWhite">#fff</color>
+  <color name="colorBackgroundProgressBarLoading">#ffffff</color>
 </resources>

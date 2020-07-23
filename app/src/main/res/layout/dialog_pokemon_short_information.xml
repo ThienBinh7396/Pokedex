@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+
+    <variable
+      name="mPokemonDetailViewModel"
+      type="com.example.pokedexapplication.viewModel.PokemonDetailViewModel" />
+  </data>
+
+  <RelativeLayout
+    android:id="@+id/containerView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+      android:id="@+id/overlapArea"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_centerInParent="true"
+      android:clickable="true"
+      android:focusable="true" />
+
+    <androidx.cardview.widget.CardView
+      android:id="@+id/dialog_content"
+      android:layout_width="320dp"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:layout_margin="@dimen/dimen_spacing__xl"
+      app:cardBackgroundColor="@color/colorBackground"
+      app:cardCornerRadius="24dp">
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="320dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/dimen_spacing__sm"
+        android:paddingVertical="@dimen/dimen_dialog_content_spacing">
+
+        <ProgressBar
+          android:layout_width="@dimen/dimen_circular_progress_bar_size__lg"
+          android:layout_height="@dimen/dimen_circular_progress_bar_size__lg"
+          android:layout_centerInParent="true"
+          app:goneUnless="@{mPokemonDetailViewModel.isLoading}" />
+
+        <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          app:goneUnless="@{!mPokemonDetailViewModel.isLoading}">
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/dimen_spacing__sm"
+            android:paddingBottom="@dimen/dimen_dialog_header_spacing">
+
+            <ImageView
+              android:id="@+id/imvPokemonImage"
+              android:layout_width="@dimen/dimen_pokemon_recycleview_image_pokemon_size"
+              android:layout_height="@dimen/dimen_pokemon_recycleview_image_pokemon_size"
+              android:layout_marginEnd="@dimen/dimen_spacing__md"
+              app:bindImageSrc="@{mPokemonDetailViewModel.pokemon.image}" />
+
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                android:id="@+id/tvPokemonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{mPokemonDetailViewModel.pokemon.name}"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="@dimen/dimen_pokemon_recycleview_name_font" />
+
+              <TextView
+                android:id="@+id/tvPokemonId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{mPokemonDetailViewModel.pokemonIdText}"
+                android:textColor="@color/colorTextThird"
+                android:textSize="@dimen/dimen_pokemon_recycleview_id_font" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/rcvPokemonType"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              app:bindPokemonTypes="@{mPokemonDetailViewModel.pokemonTypes}"/>
+          </LinearLayout>
+
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorRecyclerViewBorder" />
+
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvPokemonWeakness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bindPokemonWeaknesses="@{mPokemonDetailViewModel.pokemonWeaknesses}"/>
+        </LinearLayout>
+      </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+  </RelativeLayout>
+</layout>

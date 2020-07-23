@@ -13,6 +13,8 @@
 
   <dimen name="border_size">3dp</dimen>
 
+  <dimen name="dimen_spacing__xl">24dp</dimen>
+  <dimen name="dimen_spacing__lg">20dp</dimen>
   <dimen name="dimen_spacing">16dp</dimen>
   <dimen name="dimen_spacing__md">12dp</dimen>
   <dimen name="dimen_spacing__xs">4dp</dimen>
@@ -20,9 +22,21 @@
 
   <dimen name="dimen_pokemon_recycleview_image_pokemon_size">42dp</dimen>
   <dimen name="dimen_pokemon_recycleview_image_pokemon_type_size">35dp</dimen>
+  <dimen name="dimen_pokemon_image_pokemon_type_size_sm">32dp</dimen>
   <dimen name="dimen_pokemon_recycleview_name_font">16sp</dimen>
   <dimen name="dimen_pokemon_recycleview_price_font">13sp</dimen>
   <dimen name="dimen_pokemon_recycleview_currency_font">13sp</dimen>
   <dimen name="dimen_pokemon_recycleview_id_font">13sp</dimen>
+
   <dimen name="dimen_circular_progress_bar_size">24dp</dimen>
+  <dimen name="dimen_circular_progress_bar_size__lg">36dp</dimen>
+
+  <dimen name="dimen_dialog_content_spacing">12dp</dimen>
+  <dimen name="dimen_dialog_header_spacing">10dp</dimen>
+
+  <dimen name="dimen_weakness_effect_font_size">15sp</dimen>
+
+  <dimen name="dimen_progress_bar_loading_container_width">68dp</dimen>
+  <dimen name="dimen_progress_bar_loading_container_height">42dp</dimen>
+  <dimen name="dimen_progress_bar_loading_container_radius">40dp</dimen>
 </resources>

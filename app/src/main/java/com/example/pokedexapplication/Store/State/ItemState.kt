@@ -5,5 +5,6 @@ import org.rekotlin.StateType
 
 data class ItemState(
   var total: Int = 0,
-  var items: MutableList<Item> = mutableListOf()
-): StateType
+  var items: MutableList<Item> = mutableListOf(),
+  var isLoadingItems: Boolean = false
+) : StateType

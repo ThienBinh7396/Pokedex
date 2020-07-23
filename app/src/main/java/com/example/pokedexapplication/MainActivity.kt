@@ -1,34 +1,58 @@
 package com.example.pokedexapplication
 
-import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.example.pokedexapplication.Store.Action.AppAction
 import com.example.pokedexapplication.adapter.ViewPager.MainViewPagerAdapter
+import com.example.pokedexapplication.adapter.ViewPager.MainViewPagerAdapter.Companion.MAIN_NAV_TABS
+import com.example.pokedexapplication.databinding.ActivityMainBinding
+import com.example.pokedexapplication.databinding.MainNavTabLayoutBinding
+import com.example.pokedexapplication.viewModel.AppStateViewModel
+import com.example.pokedexapplication.viewModel.MainNavTabLayoutViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+  TabLayout.OnTabSelectedListener,
+  IEditextEventListener,
+  TextWatcher {
   private lateinit var mMainViewPagerAdapter: MainViewPagerAdapter
+
+  private lateinit var mMainActivityBinding: ActivityMainBinding
+
+  private lateinit var mAppStateViewModel: AppStateViewModel
+
+  private val tabLayoutViewModels = mutableListOf<MainNavTabLayoutViewModel>()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setAnimation()
-    setContentView(R.layout.activity_main)
+
+    mMainActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+    mAppStateViewModel = AppStateViewModel(this)
+
+    setContentView(mMainActivityBinding.root)
 
     setInitView()
   }
 
   private fun setInitView() {
+
+    mMainActivityBinding.mainAppBar.mAppStateViewModel = mAppStateViewModel
+
     mMainViewPagerAdapter = MainViewPagerAdapter(supportFragmentManager)
     vpMain.adapter = mMainViewPagerAdapter
 
     tlMain.setupWithViewPager(vpMain)
     setupMainTabLayout()
 
-    addEventListener()
+    bindEventListener()
   }
 
   private fun setAnimation() {
@@ -36,71 +60,94 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun setupMainTabLayout() {
-    MainViewPagerAdapter.MAIN_NAV_TABS.forEachIndexed { index, mainNavTabData ->
-      val view = LayoutInflater.from(this)
-        .inflate(R.layout.main_nav_tab_layout, null)
+    MAIN_NAV_TABS.forEachIndexed { index, _ ->
+      val mMainNavTabLayoutBinding =
+        DataBindingUtil.inflate<MainNavTabLayoutBinding>(
+          LayoutInflater.from(applicationContext),
+          R.layout.main_nav_tab_layout,
+          null,
+          false
+        )
 
-      val imvIcon = view.findViewById<ImageView>(R.id.imvIcon)
-      val tvLabel = view.findViewById<TextView>(R.id.tvLabel)
+      val mMainNavTabLayoutViewModel = MainNavTabLayoutViewModel()
 
-      GlideApp.with(this)
-        .load(mainNavTabData.iconDefault)
-        .into(imvIcon)
+      mMainNavTabLayoutViewModel.setTabPosition(index)
 
-      tvLabel.text = mainNavTabData.title
+      if (index == 0) {
+        mMainNavTabLayoutViewModel.setIsSelected(true)
+      }
+      mMainNavTabLayoutBinding.mMainNavTabLayoutViewModel = mMainNavTabLayoutViewModel
 
-      tlMain.getTabAt(index)!!.customView = view
+      mMainActivityBinding.tlMain.getTabAt(index)!!.customView = mMainNavTabLayoutBinding.root
+
+      tabLayoutViewModels.add(mMainNavTabLayoutViewModel)
     }
 
-    setupTabSelected(tlMain.getTabAt(0)!!)
   }
 
-  private fun addEventListener() {
-    tlMain.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-      override fun onTabReselected(tab: TabLayout.Tab?) {
-      }
+  private fun bindEventListener() {
+    mMainActivityBinding.tlMain.addOnTabSelectedListener(this)
 
-      override fun onTabUnselected(tab: TabLayout.Tab?) {
-        setupTabUnselected(tab!!)
-      }
-
-      override fun onTabSelected(tab: TabLayout.Tab?) {
-        setupTabSelected(tab!!)
-      }
-    })
+    mMainActivityBinding.mainAppBar.edtSearch.addTextChangedListener(this)
   }
 
-  private fun setupTabUnselected(tab: TabLayout.Tab) {
-    val view = tab.customView!!
 
-    val imvIcon = view.findViewById<ImageView>(R.id.imvIcon)
-    val tvLabel = view.findViewById<TextView>(R.id.tvLabel)
+  override fun onTabReselected(tab: TabLayout.Tab?) {
+  }
 
-    GlideApp.with(this)
-      .load(MainViewPagerAdapter.MAIN_NAV_TABS[tab.position].iconDefault)
-      .into(imvIcon)
+  override fun onTabUnselected(tab: TabLayout.Tab?) {
+    if (tab != null) {
+      tabLayoutViewModels[tab.position].setIsSelected(false)
+    }
+  }
 
-    if (Build.VERSION.SDK_INT > 22) {
-      tvLabel.setTextColor(resources.getColor(R.color.colorMainNavTabDefault, null))
+  override fun onTabSelected(tab: TabLayout.Tab?) {
+    if (tab != null) {
+      tabLayoutViewModels[tab.position].setIsSelected(true)
+      store.dispatch(AppAction.UPDATE_TITLE_MAIN_ACTIVITY(MAIN_NAV_TABS[tab.position].title))
+
+      resetSearchAction()
+    }
+  }
+
+  private fun checkSearchQueryIsBlank() = store.state.appState.searchQuery.isBlank()
+
+  private fun resetSearchAction(){
+    store.dispatch(AppAction.UPDATE_SEARCH_QUERY(""))
+    store.dispatch(AppAction.UPDATE_IS_SEARCHING(false))
+
+    mMainActivityBinding.mainAppBar.edtSearch.clearFocus()
+  }
+
+  override fun onClearClickListener() {
+    if (checkSearchQueryIsBlank()) {
+      Toast.makeText(this, "Type something...", Toast.LENGTH_SHORT).show()
     } else {
-      tvLabel.setTextColor(resources.getColor(R.color.colorMainNavTabDefault))
+      resetSearchAction()
     }
   }
 
-  private fun setupTabSelected(tab: TabLayout.Tab) {
-    val view = tab.customView!!
-
-    val imvIcon = view.findViewById<ImageView>(R.id.imvIcon)
-    val tvLabel = view.findViewById<TextView>(R.id.tvLabel)
-
-    GlideApp.with(this)
-      .load(MainViewPagerAdapter.MAIN_NAV_TABS[tab.position].iconActive)
-      .into(imvIcon)
-
-    if (Build.VERSION.SDK_INT > 22) {
-      tvLabel.setTextColor(resources.getColor(R.color.colorMainNavTabActive, null))
+  override fun onGotoSearchClickListener() {
+    if (checkSearchQueryIsBlank()) {
+      Toast.makeText(this, "Type something...", Toast.LENGTH_SHORT).show()
     } else {
-      tvLabel.setTextColor(resources.getColor(R.color.colorMainNavTabActive))
+      store.dispatch(AppAction.UPDATE_IS_SEARCHING(true))
     }
   }
+
+  override fun afterTextChanged(p0: Editable?) {
+  }
+
+  override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+  }
+
+  override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    store.dispatch(AppAction.UPDATE_SEARCH_QUERY(text.toString()))
+  }
+
+}
+
+interface IEditextEventListener {
+  fun onClearClickListener()
+  fun onGotoSearchClickListener()
 }

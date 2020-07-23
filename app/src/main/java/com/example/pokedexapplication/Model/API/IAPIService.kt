@@ -3,6 +3,7 @@ package com.example.pokedexapplication.Model.API
 import com.example.pokedexapplication.Model.ListItemResponse
 import com.example.pokedexapplication.Model.ListMoveResponse
 import com.example.pokedexapplication.Model.ListPokemonResponse
+import com.example.pokedexapplication.Model.PokemonDetail
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -35,5 +36,10 @@ interface IAPIService {
     @Query("page") page: Int?,
     @Query("records") records: Int? = null
   ): Call<ListPokemonResponse>
+
+  @GET("pokemons/{id}")
+  fun getDetailPokemonById(
+    @Path("id") id: String
+  ): Call<PokemonDetail>
 
 }

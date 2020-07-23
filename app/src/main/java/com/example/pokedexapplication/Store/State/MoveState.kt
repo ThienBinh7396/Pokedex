@@ -5,5 +5,6 @@ import org.rekotlin.StateType
 
 data class MoveState(
   var total: Int = 0,
-  var moves: MutableList<Move> = mutableListOf()
+  var moves: MutableList<Move> = mutableListOf(),
+  var isLoadingMoves: Boolean = false
 ): StateType

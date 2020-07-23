@@ -1,22 +1,28 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">
-            @color/colorPrimary
-        </item>
-        <item name="colorPrimaryDark">
-            @color/colorPrimaryDark
-        </item>
-        <item name="colorAccent">
-            @color/colorAccent
-        </item>
-        <item name="android:textColor">
-            @color/colorTextPrimary
-        </item>
-        <item name="android:windowBackground">
-            @color/colorBackground
-        </item>
-    </style>
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">
+      @color/colorPrimary
+    </item>
+    <item name="colorPrimaryDark">
+      @color/colorPrimaryDark
+    </item>
+    <item name="colorAccent">
+      @color/colorAccent
+    </item>
+    <item name="android:textColor">
+      @color/colorTextPrimary
+    </item>
+    <item name="android:windowBackground">
+      @color/colorBackground
+    </item>
+  </style>
+
+
+  <style name="PokemonInformationDialogAnimation">
+    <item name="android:windowEnterAnimation">@anim/enter_pokemon_dialog_content_anim</item>
+    <item name="android:windowExitAnimation">@anim/exit_pokemon_dialog_content_anim</item>
+  </style>
 
 </resources>

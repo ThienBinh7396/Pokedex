@@ -11,25 +11,34 @@
       type="com.example.pokedexapplication.viewModel.PokemonFragmentViewModel" />
   </data>
 
-  <LinearLayout
+  <RelativeLayout
     android:id="@+id/pokemon_fragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/rcvPokemon"
       android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1"
-      app:bindPokemonData="@{mPokemonFragmentViewModel.pokemonList}" />
+      android:layout_height="match_parent"
+      android:layout_marginBottom="@dimen/dimen_spacing__xs"
+      app:bindPokemonData="@{mPokemonFragmentViewModel.typeOfPokemonsIsSearchList ? mPokemonFragmentViewModel.searchPokemonList : mPokemonFragmentViewModel.pokemonList }" />
 
-    <ProgressBar
-      android:id="@+id/pbPokemonLoading"
-      android:layout_width="@dimen/dimen_circular_progress_bar_size"
-      android:layout_height="@dimen/dimen_circular_progress_bar_size"
-      android:layout_gravity="center_horizontal"
-      android:layout_margin="@dimen/dimen_spacing__xs"
-      android:visibility="gone"/>
-  </LinearLayout>
+    <RelativeLayout
+      android:layout_width="@dimen/dimen_progress_bar_loading_container_width"
+      android:layout_height="@dimen/dimen_progress_bar_loading_container_height"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:background="@drawable/background_progress_bar_loading_container"
+      app:goneUnlessWithSlideAnimation="@{mPokemonFragmentViewModel.isLoading}">
+
+      <ProgressBar
+        android:id="@+id/pbPokemonLoading"
+        android:layout_width="@dimen/dimen_circular_progress_bar_size"
+        android:layout_height="@dimen/dimen_circular_progress_bar_size"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/dimen_spacing__xs" />
+    </RelativeLayout>
+  </RelativeLayout>
 </layout>

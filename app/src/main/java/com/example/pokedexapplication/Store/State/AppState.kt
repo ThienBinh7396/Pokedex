@@ -9,6 +9,10 @@ data class FirstFetchData(
 )
 
 data class AppState(
+  var searchQuery: String = "",
+  var lastSearchQuery: String = "",
+  var isSearching: Boolean = false,
   var isFetching: Boolean = false,
-  var isFirstFetchData: FirstFetchData = FirstFetchData()
+  var isFirstFetchData: FirstFetchData = FirstFetchData(),
+  var titleMainActivity: String = "Pokemon"
 ) : StateType

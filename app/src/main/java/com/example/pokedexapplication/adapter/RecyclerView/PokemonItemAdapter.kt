@@ -15,33 +15,35 @@ import com.example.pokedexapplication.viewModel.PokemonFragmentViewModel
 import com.example.pokedexapplication.viewModel.PokemonTypeViewModel
 import com.example.pokedexapplication.viewModel.PokemonViewModel
 
-class PokemonItemAdapter :
+class PokemonItemAdapter(var eventLintener: PokemonItemEventListener) :
   RecyclerView.Adapter<PokemonItemAdapter.PokemonItemViewHolder>() {
   private var pokemonList: MutableList<Pokemon> = mutableListOf()
 
-  class PokemonItemViewHolder(var mPokemonItemBinding: PokemonItemBinding) :
+  private var currentIndexSelected = -1
+
+  class PokemonItemViewHolder(
+    var mPokemonItemBinding: PokemonItemBinding,
+    eventLintener: PokemonItemEventListener
+  ) :
     RecyclerView.ViewHolder(
       mPokemonItemBinding.pokemonItem
     ) {
     private var mLinearLayoutManager = LinearLayoutManager(mPokemonItemBinding.pokemonItem.context)
 
-    private var mPokemonTypeItemAdapter = PokemonTypeItemAdapter()
-
     init {
       mLinearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
 
-      mPokemonItemBinding.rcvPokemonType.adapter = mPokemonTypeItemAdapter
       mPokemonItemBinding.rcvPokemonType.layoutManager = mLinearLayoutManager
+
+      mPokemonItemBinding.mPokemonItemEventListener = eventLintener
     }
 
-    fun bindPokemonItem(pokemonItem: Pokemon) {
+    fun bindPokemonItem(pokemonItem: Pokemon, position: Int) {
       if (mPokemonItemBinding.mPokemonViewModel == null) {
-        mPokemonItemBinding.mPokemonViewModel = PokemonViewModel(pokemonItem)
+        mPokemonItemBinding.mPokemonViewModel = PokemonViewModel(pokemonItem, position)
       } else {
         (mPokemonItemBinding.mPokemonViewModel as PokemonViewModel).setPokemonData(pokemonItem)
       }
-
-      mPokemonTypeItemAdapter.updatePokemonTypes(pokemonItem.pokemonTypes)
     }
   }
 
@@ -50,13 +52,13 @@ class PokemonItemAdapter :
       LayoutInflater.from(parent.context), R.layout.pokemon_item, parent, false
     )
 
-    return PokemonItemViewHolder(mPokemonItemBinding)
+    return PokemonItemViewHolder(mPokemonItemBinding, eventLintener)
   }
 
   override fun getItemCount() = pokemonList.size
 
   override fun onBindViewHolder(holder: PokemonItemViewHolder, position: Int) {
-    holder.bindPokemonItem(pokemonList[position])
+    holder.bindPokemonItem(pokemonList[position], position)
   }
 
   fun updatePokemonList(_pokemonList: MutableList<Pokemon>, refresh: Boolean = true) {
@@ -65,7 +67,23 @@ class PokemonItemAdapter :
     notifyDataSetChanged()
   }
 
+  fun updateIndexSelected(index: Int) {
+    if (this.currentIndexSelected != -1) {
+      this.pokemonList[this.currentIndexSelected].isSelected = false
+      notifyItemChanged(this.currentIndexSelected)
+    }
+
+    this.pokemonList[index].isSelected = this.currentIndexSelected != index
+    this.currentIndexSelected = if (this.currentIndexSelected == index) -1 else index
+
+    notifyItemChanged(index)
+  }
+
   override fun getItemViewType(position: Int): Int {
     return position
+  }
+
+  interface PokemonItemEventListener {
+    fun onItemClickListener(position: Int, pokemonId: String)
   }
 }

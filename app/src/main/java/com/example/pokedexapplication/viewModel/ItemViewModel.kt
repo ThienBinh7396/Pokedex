@@ -21,7 +21,7 @@ class ItemViewModel(item: Item) : BaseObservable() {
     get() = this.mItem!!.name
 
   val price
-    get() = this.mItem!!.price
+    get() = this.mItem!!.price.toString()
 
 
   fun setItemData(item: Item) {

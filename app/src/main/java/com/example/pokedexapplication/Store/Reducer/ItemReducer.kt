@@ -2,6 +2,7 @@ package com.example.pokedexapplication.Store.Reducer
 
 import android.util.Log
 import com.example.pokedexapplication.Model.API.APIUtils
+import com.example.pokedexapplication.Model.Item
 import com.example.pokedexapplication.Model.ListItemResponse
 import com.example.pokedexapplication.Store.Action.ItemAction
 import com.example.pokedexapplication.Store.State.ItemState
@@ -17,6 +18,12 @@ fun itemReducer(action: Action, itemState: ItemState?): ItemState {
     is ItemAction.UPDATE_TOTAL -> {
       _itemState = _itemState.copy(
         total = action.total
+      )
+    }
+
+    is ItemAction.UPDATE_ITEM_LOADING_STATE -> {
+      _itemState = _itemState.copy(
+        isLoadingItems = action.isLoadingItems
       )
     }
 
