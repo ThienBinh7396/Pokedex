@@ -1,9 +1,9 @@
-package com.example.pokedexapplication.Model.API
+package com.example.pokedexapplication.model.API
 
-import com.example.pokedexapplication.Model.ListItemResponse
-import com.example.pokedexapplication.Model.ListMoveResponse
-import com.example.pokedexapplication.Model.ListPokemonResponse
-import com.example.pokedexapplication.Model.PokemonDetail
+import com.example.pokedexapplication.model.ListItemResponse
+import com.example.pokedexapplication.model.ListMoveResponse
+import com.example.pokedexapplication.model.ListPokemonResponse
+import com.example.pokedexapplication.model.PokemonDetail
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

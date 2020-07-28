@@ -1,9 +1,9 @@
 package com.example.pokedexapplication.Store.Middleware
 
 import android.util.Log
-import com.example.pokedexapplication.Model.API.APIUtils
-import com.example.pokedexapplication.Model.ListPokemonResponse
-import com.example.pokedexapplication.Model.PokemonDetail
+import com.example.pokedexapplication.model.API.APIUtils
+import com.example.pokedexapplication.model.ListPokemonResponse
+import com.example.pokedexapplication.model.PokemonDetail
 import com.example.pokedexapplication.Store.Action.AppAction
 import com.example.pokedexapplication.Store.Action.PokemonAction
 import com.example.pokedexapplication.Store.State.FirstFetchData

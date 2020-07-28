@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="mPokemonBaseicStatsViewModel"
+      type="com.example.pokedexapplication.viewModel.PokemonBaseicStatsViewModel" />
+  </data>
+
+  <TableRow
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dimen_spacing__xs">
+
+    <TextView
+      android:layout_height="wrap_content"
+      android:text="@{mPokemonBaseicStatsViewModel.name}"
+      android:textAllCaps="true"
+      android:textColor="@color/colorLabelBase"
+      android:textSize="16sp"/>
+
+    <TextView
+      android:layout_height="wrap_content"
+      android:paddingStart="@dimen/dimen_spacing__sm"
+      android:paddingEnd="@dimen/dimen_spacing__md"
+      android:text="@{mPokemonBaseicStatsViewModel.valueText}"
+      android:textAlignment="textEnd"
+      android:textColor="#666666"
+      android:textSize="16sp" />
+
+    <ProgressBar
+      style="?android:attr/progressBarStyleHorizontal"
+      android:layout_gravity="center_vertical"
+      android:max="@{mPokemonBaseicStatsViewModel.maxValue}"
+      android:progress="@{mPokemonBaseicStatsViewModel.value}"
+      android:progressDrawable="@drawable/background_progress_bar_pokemon_base_stat_gradient"
+      android:scaleY="0.82"
+      tools:ignore="UnusedAttribute" />
+  </TableRow>
+</layout>

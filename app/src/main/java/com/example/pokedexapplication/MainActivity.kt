@@ -1,15 +1,19 @@
 package com.example.pokedexapplication
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.pokedexapplication.Store.Action.AppAction
-import com.example.pokedexapplication.adapter.ViewPager.MainViewPagerAdapter
-import com.example.pokedexapplication.adapter.ViewPager.MainViewPagerAdapter.Companion.MAIN_NAV_TABS
+import com.example.pokedexapplication.adapter.viewPager.MainViewPagerAdapter
+import com.example.pokedexapplication.adapter.viewPager.MainViewPagerAdapter.Companion.MAIN_NAV_TABS
 import com.example.pokedexapplication.databinding.ActivityMainBinding
 import com.example.pokedexapplication.databinding.MainNavTabLayoutBinding
 import com.example.pokedexapplication.viewModel.AppStateViewModel
@@ -112,19 +116,17 @@ class MainActivity : AppCompatActivity(),
 
   private fun checkSearchQueryIsBlank() = store.state.appState.searchQuery.isBlank()
 
-  private fun resetSearchAction(){
-    store.dispatch(AppAction.UPDATE_SEARCH_QUERY(""))
-    store.dispatch(AppAction.UPDATE_IS_SEARCHING(false))
+  private fun resetSearchAction() {
+    if (!checkSearchQueryIsBlank()) {
+      store.dispatch(AppAction.UPDATE_SEARCH_QUERY(""))
+      store.dispatch(AppAction.UPDATE_IS_SEARCHING(false))
+    }
 
-    mMainActivityBinding.mainAppBar.edtSearch.clearFocus()
+    hideEditTextFocus(mMainActivityBinding.mainAppBar.edtSearch)
   }
 
   override fun onClearClickListener() {
-    if (checkSearchQueryIsBlank()) {
-      Toast.makeText(this, "Type something...", Toast.LENGTH_SHORT).show()
-    } else {
       resetSearchAction()
-    }
   }
 
   override fun onGotoSearchClickListener() {
@@ -132,7 +134,15 @@ class MainActivity : AppCompatActivity(),
       Toast.makeText(this, "Type something...", Toast.LENGTH_SHORT).show()
     } else {
       store.dispatch(AppAction.UPDATE_IS_SEARCHING(true))
+      hideEditTextFocus(mMainActivityBinding.mainAppBar.edtSearch)
     }
+
+  }
+
+  private fun hideEditTextFocus(editText: EditText){
+    editText.clearFocus()
+
+    (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(currentFocus?.windowToken, 0)
   }
 
   override fun afterTextChanged(p0: Editable?) {

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+
+    <variable
+      name="mPokemonEvolutionViewModel"
+      type="com.example.pokedexapplication.viewModel.PokemonEvolutionViewModel" />
+  </data>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dimen_spacing"
+    android:layout_marginBottom="@dimen/dimen_spacing__sm"
+    android:orientation="horizontal"
+    android:paddingHorizontal="24dp">
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <ImageView
+        android:layout_width="@dimen/dimen_pokemon_evolution_pokemon_image_size"
+        android:layout_height="@dimen/dimen_pokemon_evolution_pokemon_image_size"
+        app:bindImageSrc="@{mPokemonEvolutionViewModel.pokemonEvolution.pokemonImage}" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_spacing__xs"
+        android:text="@{mPokemonEvolutionViewModel.pokemonEvolution.pokemonName}"
+        android:textAlignment="center"
+        android:textColor="@color/colorLabelSecondary"
+        android:textSize="@dimen/dimen_pokemon_evolution_pokemon_label_font" />
+    </LinearLayout>
+
+    <RelativeLayout
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1"
+      android:paddingHorizontal="@dimen/dimen_spacing">
+
+      <ImageView
+        android:id="@+id/icon_navigate_state"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/group_2" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/icon_navigate_state"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dimen_spacing__xs"
+        android:text="@{mPokemonEvolutionViewModel.evolutionLevelText}"
+        android:textColor="@color/colorLabelBase"
+        android:textSize="@dimen/dimen_pokemon_evolution_pokemon_label_font__sm" />
+    </RelativeLayout>
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <ImageView
+        android:layout_width="@dimen/dimen_pokemon_evolution_pokemon_image_size"
+        android:layout_height="@dimen/dimen_pokemon_evolution_pokemon_image_size"
+        app:bindImageSrc="@{mPokemonEvolutionViewModel.pokemonEvolution.evolutionpokemonImage}" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_spacing__xs"
+        android:text="@{mPokemonEvolutionViewModel.pokemonEvolution.evolutionPokemonName}"
+        android:textAlignment="center"
+        android:textColor="@color/colorLabelSecondary"
+        android:textSize="@dimen/dimen_pokemon_evolution_pokemon_label_font" />
+    </LinearLayout>
+  </LinearLayout>
+</layout>

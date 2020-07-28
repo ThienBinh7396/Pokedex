@@ -1,8 +1,15 @@
 package com.example.pokedexapplication.viewModel
 
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.TableLayout
 import androidx.databinding.BaseObservable
-import com.example.pokedexapplication.Model.PokemonDetail
+import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
+import com.example.pokedexapplication.model.PokemonBasicStat
+import com.example.pokedexapplication.model.PokemonDetail
+import com.example.pokedexapplication.R
+import com.example.pokedexapplication.databinding.TableRowPokemonBasicStatBinding
 
 class PokemonDetailViewModel : BaseObservable() {
   private var pokemonDetail: PokemonDetail? = null
@@ -10,6 +17,10 @@ class PokemonDetailViewModel : BaseObservable() {
 
   val stats
     get() = this.pokemonDetail?.stats
+
+  val evolutions
+    get() = this.pokemonDetail?.evolutions
+
   val moves
     get() = this.pokemonDetail?.moves
 
@@ -37,4 +48,31 @@ class PokemonDetailViewModel : BaseObservable() {
     notifyChange()
   }
 
+  companion object {
+    @BindingAdapter("app:bindTableRowPokemonStat")
+    @JvmStatic
+    fun bindTableRowPokemonStat(
+      tableLayout: TableLayout,
+      pokemonStats: MutableList<PokemonBasicStat>?
+    ) {
+      tableLayout.removeAllViews()
+
+      pokemonStats?.forEach {
+        val mTableRowPokemonBasicStatBinding =
+          DataBindingUtil.inflate<TableRowPokemonBasicStatBinding>(
+            LayoutInflater.from(tableLayout.context),
+            R.layout.table_row_pokemon_basic_stat,
+            null,
+            false
+          )
+
+        mTableRowPokemonBasicStatBinding.mPokemonBaseicStatsViewModel =
+          PokemonBaseicStatsViewModel(it)
+
+        tableLayout.addView(mTableRowPokemonBasicStatBinding.root)
+      }
+
+      tableLayout.requestLayout()
+    }
+  }
 }

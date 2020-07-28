@@ -1,12 +1,11 @@
 package com.example.pokedexapplication.viewModel
 
-import android.util.Log
 import androidx.databinding.BaseObservable
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableArrayList
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedexapplication.adapter.RecyclerView.PokemonItemAdapter
-import com.example.pokedexapplication.Model.Pokemon
+import com.example.pokedexapplication.model.Pokemon
 import com.example.pokedexapplication.store
 
 class PokemonFragmentViewModel : BaseObservable() {
@@ -42,7 +41,7 @@ class PokemonFragmentViewModel : BaseObservable() {
   companion object {
     @BindingAdapter("app:bindPokemonData")
     @JvmStatic
-    fun setBindPokemonData(
+    fun bindPokemonData(
       rcvPokemon: RecyclerView,
       pokemons: ObservableArrayList<MutableList<Pokemon>>
     ) {

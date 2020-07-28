@@ -1,8 +1,7 @@
 package com.example.pokedexapplication.viewModel
 
-import android.util.Log
 import androidx.databinding.BaseObservable
-import com.example.pokedexapplication.Model.WeaknessesResponse
+import com.example.pokedexapplication.model.WeaknessesResponse
 import com.example.pokedexapplication.common.NumberUtils
 
 class PokemonWeaknessViewModel(pokemonWeakness: WeaknessesResponse?) : BaseObservable() {

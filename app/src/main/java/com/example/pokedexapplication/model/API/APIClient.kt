@@ -1,4 +1,4 @@
-package com.example.pokedexapplication.Model.API
+package com.example.pokedexapplication.model.API
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -22,6 +22,13 @@ fun moveReducer(action: Action, moveState: MoveState?): MoveState {
         total = action.state.total,
         moves = action.state.moves
       )
+    is MoveAction.UPDATE_SEARCH_MOVES_STATE -> {
+      _moveState = _moveState.copy(
+        searchTotal = action.state.total,
+        searchMoves = action.state.moves.distinctBy { it.name }.toMutableList()
+      )
+    }
+
     is MoveAction.UPDATE_MOVES_LOADING_STATE ->
       _moveState = _moveState.copy(
         isLoadingMoves = action.isLoadingMoves

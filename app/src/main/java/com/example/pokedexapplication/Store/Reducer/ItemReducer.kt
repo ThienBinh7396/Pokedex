@@ -1,15 +1,8 @@
 package com.example.pokedexapplication.Store.Reducer
 
-import android.util.Log
-import com.example.pokedexapplication.Model.API.APIUtils
-import com.example.pokedexapplication.Model.Item
-import com.example.pokedexapplication.Model.ListItemResponse
 import com.example.pokedexapplication.Store.Action.ItemAction
 import com.example.pokedexapplication.Store.State.ItemState
 import org.rekotlin.Action
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 fun itemReducer(action: Action, itemState: ItemState?): ItemState {
   var _itemState = itemState ?: ItemState()
@@ -38,6 +31,15 @@ fun itemReducer(action: Action, itemState: ItemState?): ItemState {
         _itemState = _itemState.copy(
           items = action.itemState!!.items,
           total = action.itemState!!.total
+        )
+      }
+    }
+
+    is ItemAction.UPDATE_SEARCH_ITEM_STATE -> {
+      if (action.itemState != null) {
+        _itemState = _itemState.copy(
+          searchItems = action.itemState!!.items.distinctBy { it.name }.toMutableList(),
+          searchTotal = action.itemState!!.total
         )
       }
     }

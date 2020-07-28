@@ -17,19 +17,19 @@
 
     <variable
       name="mPokemonTypeViewModel"
-      type="com.example.pokedexapplication.viewModel.PokemonTypeViewModel"  />
+      type="com.example.pokedexapplication.viewModel.PokemonTypeViewModel" />
   </data>
 
   <LinearLayout
     android:id="@+id/pokemon_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:onClick="@{() -> mPokemonItemEventListener.onItemClickListener(mPokemonViewModel.position, mPokemonViewModel.id)}"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/dimen_spacing"
-    app:bindPokemonSelectedBackground="@{mPokemonViewModel.isSelected}"
-    android:focusable="true"
-    android:clickable="true"
-    android:onClick="@{() -> mPokemonItemEventListener.onItemClickListener(mPokemonViewModel.position, mPokemonViewModel.id)}">
+    app:bindPokemonSelectedBackground="@{mPokemonViewModel.isSelected}">
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -70,8 +70,7 @@
         android:id="@+id/rcvPokemonType"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:bindPokemonTypes="@{mPokemonViewModel.pokemonTypes}"
-        />
+        app:bindPokemonTypes="@{mPokemonViewModel.pokemonTypes}" />
     </LinearLayout>
 
     <View

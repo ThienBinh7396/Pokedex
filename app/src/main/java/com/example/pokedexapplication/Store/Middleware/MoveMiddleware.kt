@@ -1,14 +1,13 @@
 package com.example.pokedexapplication.Store.Middleware
 
 import android.util.Log
-import com.example.pokedexapplication.Model.API.APIUtils
-import com.example.pokedexapplication.Model.ListMoveResponse
+import com.example.pokedexapplication.model.API.APIUtils
+import com.example.pokedexapplication.model.ListMoveResponse
 import com.example.pokedexapplication.Store.Action.AppAction
 import com.example.pokedexapplication.Store.Action.MoveAction
 import com.example.pokedexapplication.Store.State.FirstFetchData
 import com.example.pokedexapplication.Store.State.RootState
 import com.example.pokedexapplication.store
-import org.rekotlin.Action
 import org.rekotlin.DispatchFunction
 import org.rekotlin.Middleware
 import retrofit2.Call
@@ -42,6 +41,16 @@ fun fetchMovesData(
   isFirstFetch: Boolean,
   dispatch: DispatchFunction
 ) {
+  store.state.moveState.apply {
+    if (!isSearching && total != 0 && moves.size >= total) {
+      return@fetchMovesData
+    }
+
+    if (isSearching && searchTotal != 0 && searchMoves.size >= searchTotal) {
+      return@fetchMovesData
+    }
+  }
+
   dispatch(MoveAction.UPDATE_MOVES_LOADING_STATE(true))
 
   APIUtils.getAPIService().fetchMoves(
@@ -67,6 +76,13 @@ fun fetchMovesData(
             ListMoveResponse(
               total, moves
             )
+          )
+        )
+      } else {
+        moves.addAll(0, store.state.moveState.searchMoves)
+        dispatch(
+          MoveAction.UPDATE_SEARCH_MOVES_STATE(
+            ListMoveResponse(total, moves)
           )
         )
       }

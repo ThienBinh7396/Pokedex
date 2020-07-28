@@ -35,8 +35,6 @@ class PokemonShortInformationDialog(
 
   private var mPokemonTypeLinearLayoutManager: LinearLayoutManager
 
-  private var mPokemonWeaknessesGridLayoutManager: GridLayoutManager
-
   private var handleOnDimissListener: IInformationPokemonDialogOnDimissListener? = null
 
   private var positionPokemonShowing: Int = -1
@@ -76,8 +74,6 @@ class PokemonShortInformationDialog(
     mDialogPokemonShortInformationBinding.rcvPokemonType.layoutManager =
       mPokemonTypeLinearLayoutManager
 
-    mPokemonWeaknessesGridLayoutManager = GridLayoutManager(activity, 3)
-    mDialogPokemonShortInformationBinding.rcvPokemonWeakness.layoutManager = mPokemonWeaknessesGridLayoutManager
 
     dialog = Dialog(activity)
     dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -105,8 +101,6 @@ class PokemonShortInformationDialog(
     overlapArea.setOnClickListener {
       setContentViewAnimation(false)
 
-      store.unsubscribe(this)
-
       handler.postDelayed({
         dialog?.dismiss()
       }, 200)
@@ -117,6 +111,11 @@ class PokemonShortInformationDialog(
       handleDimissDialog()
     }
 
+    store.subscribe(this) {
+      it.select { it ->
+        it.pokemonState
+      }
+    }
 
   }
 
@@ -127,16 +126,12 @@ class PokemonShortInformationDialog(
   }
 
   fun showDialog(positionPokemon: Int, pokemonId: String) {
-    store.subscribe(this) {
-      it.select { it ->
-        it.pokemonState
-      }
-    }
 
     this.positionPokemonShowing = positionPokemon
 
+    blurBackgroundBehind()
+
     handler.postDelayed({
-      blurBackgroundBehind()
       dialog?.show()
       setContentViewAnimation(true)
       Log.d("Binh", "dialog. show")

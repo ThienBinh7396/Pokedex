@@ -1,4 +1,4 @@
-package com.example.pokedexapplication.Model.API
+package com.example.pokedexapplication.model.API
 
 class APIUtils {
   companion object {

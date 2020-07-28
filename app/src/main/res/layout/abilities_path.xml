@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginVertical="@dimen/dimen_spacing__md"
+      android:text="@string/abilities_text"
+      android:textColor="@color/colorLabelBase"
+      android:textSize="@dimen/dimen_pokemon_stat_label_font" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/dimen_spacing__sm"
+      android:layout_marginBottom="@dimen/dimen_spacing__xs"
+      android:text="Torrent"
+      android:textColor="@color/colorLabelBase"
+      android:textSize="@dimen/dimen_pokemon_stat_label_font__sm" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/dimen_spacing__md"
+      android:text="Powers up Water-type moves when the Pokémon is in trouble."
+      android:textColor="@color/colorTextSecondary"
+      android:textSize="@dimen/dimen_pokemon_stat_content_font" />
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/colorRecyclerViewBorder" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/dimen_spacing__sm"
+      android:layout_marginBottom="@dimen/dimen_spacing__xs"
+      android:text="Rain Dish"
+      android:textColor="@color/colorLabelBase"
+      android:textSize="@dimen/dimen_pokemon_stat_label_font__sm" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/dimen_spacing__md"
+      android:text="The Pokémon gradually regains HP in rain."
+      android:textColor="@color/colorTextSecondary"
+      android:textSize="@dimen/dimen_pokemon_stat_content_font" />
+
+  </LinearLayout>
+</layout>

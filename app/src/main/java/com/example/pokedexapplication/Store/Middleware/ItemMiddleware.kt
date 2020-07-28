@@ -1,12 +1,11 @@
 package com.example.pokedexapplication.Store.Middleware
 
 import android.util.Log
-import com.example.pokedexapplication.Model.API.APIUtils
-import com.example.pokedexapplication.Model.ListItemResponse
+import com.example.pokedexapplication.model.API.APIUtils
+import com.example.pokedexapplication.model.ListItemResponse
 import com.example.pokedexapplication.Store.Action.AppAction
 import com.example.pokedexapplication.Store.Action.ItemAction
 import com.example.pokedexapplication.Store.State.FirstFetchData
-import com.example.pokedexapplication.Store.State.ItemState
 import com.example.pokedexapplication.Store.State.RootState
 import com.example.pokedexapplication.store
 import org.rekotlin.DispatchFunction
@@ -44,6 +43,16 @@ fun fetchItemsData(
   isFirstFetch: Boolean,
   dispatch: DispatchFunction
 ) {
+  store.state.itemState.apply {
+    if (!isSearching && total != 0 && items.size >= total) {
+      return@fetchItemsData
+    }
+
+    if (isSearching && searchTotal != 0 && searchItems.size >= searchTotal) {
+      return@fetchItemsData
+    }
+  }
+
   dispatch(ItemAction.UPDATE_ITEM_LOADING_STATE(true))
 
   APIUtils.getAPIService().fetchItems(name = name, page = page)
@@ -54,11 +63,11 @@ fun fetchItemsData(
       }
 
       override fun onResponse(call: Call<ListItemResponse>, response: Response<ListItemResponse>) {
-        var items = response.body()!!.items
-        var total = response.body()!!.total
+        val items = response.body()!!.items
+        val total = response.body()!!.total
 
-        if (!isSearching)
-          if (!isFirstFetch){
+        if (!isSearching) {
+          if (!isFirstFetch) {
             items.addAll(0, store.state.itemState.items)
           }
 
@@ -67,6 +76,17 @@ fun fetchItemsData(
               ListItemResponse(total, items)
             )
           )
+        }
+
+        if (isSearching) {
+          items.addAll(0, store.state.itemState.searchItems)
+
+          dispatch(
+            ItemAction.UPDATE_SEARCH_ITEM_STATE(
+              ListItemResponse(total, items)
+            )
+          )
+        }
 
         if (isFirstFetch) {
           dispatch(

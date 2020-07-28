@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="mItemViewModel"
+      type="com.example.pokedexapplication.viewModel.ItemViewModel" />
+  </data>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_fragment_item_detail">
+
+    <ImageView
+      android:id="@+id/imvMoveType"
+      android:layout_width="112dp"
+      android:layout_height="112dp"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="@dimen/dimen_fragment_move_detail_content_top_margin"
+      android:translationZ="2dp"
+      app:bindImageSrc="@{mItemViewModel.image}"
+      tools:targetApi="lollipop" />
+
+    <LinearLayout
+      android:id="@+id/llContent"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/imvMoveType"
+      android:layout_marginTop="-56dp"
+      android:background="@drawable/background_content_fragment_detail"
+      android:gravity="center_horizontal"
+      android:orientation="vertical"
+      android:paddingHorizontal="@dimen/dimen_spacing"
+      android:paddingTop="@dimen/dimen_fragment_move_detail_content_top_padding">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_spacing__md"
+        android:text="@{mItemViewModel.name}"
+        android:textAlignment="center"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="@dimen/dimen_fragment_item_detail_title_font_size" />
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:layout_marginEnd="@dimen/dimen_spacing__xs"
+          android:text="@{mItemViewModel.price}"
+          android:textColor="@color/colorTextThird"
+          android:textSize="@dimen/dimen_fragment_item_detail_price_font_size" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:text="@string/rubel_currency_symbol"
+          android:textColor="@color/colorTextSecondary"
+          android:textSize="@dimen/dimen_fragment_item_detail_price_font_size" />
+      </LinearLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_spacing__xl"
+        android:lineSpacingExtra="4dp"
+        android:text="@string/used_in_battle"
+        android:textAlignment="center"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="@dimen/dimen_item_detail_effect_font_size" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_spacing"
+        android:lineSpacingExtra="4dp"
+        android:text="@{mItemViewModel.effects}"
+        android:textAlignment="center"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="@dimen/dimen_item_detail_effect_font_size" />
+    </LinearLayout>
+  </RelativeLayout>
+</layout>

@@ -12,11 +12,35 @@
 
   <color name="colorSearchBoxBackground">#1e000000</color>
 
-  <color name="colorTextPrimary">#000</color>
+  <color name="colorTextPrimary">#222</color>
   <color name="colorTextSecondary">#4f4f4f</color>
   <color name="colorTextThird">#a4a4a4</color>
 
-  <color name="colorRecyclerViewBorder">#e3e3e3</color>
+  <color name="colorRecyclerViewBorder">#e1e1e1</color>
   <color name="colorWhite">#fff</color>
   <color name="colorBackgroundProgressBarLoading">#ffffff</color>
+
+  <color name="colorWater">#559edf</color>
+  <color name="colorSteel">#538ca0</color>
+  <color name="colorRock">#c9ba8b</color>
+  <color name="colorPsychic">#f77575</color>
+  <color name="colorPoison">#ac64c9</color>
+  <color name="colorNormalType">#949aa4</color>
+  <color name="colorGround">#da7b4b</color>
+  <color name="colorGrass">#5ebd58</color>
+  <color name="colorGhost">#566bb1</color>
+  <color name="colorFlying">#93aadd</color>
+  <color name="colorFire">#fb9e4f</color>
+  <color name="colorFight">#d14262</color>
+  <color name="colorFairy">#ed90e5</color>
+  <color name="colorElectric">#efd746</color>
+  <color name="colorDragon">#0a6cc8</color>
+  <color name="colorDark">#5d5d68</color>
+  <color name="colorBug">#95bd2d</color>
+  <color name="colorIce">#74cec0</color>
+
+  <color name="colorLabelBase">#559edf</color>
+  <color name="colorLabelSecondary">#666666</color>
+  <color name="colorMale">#ce71e1</color>
+  <color name="colorFemale">#80b6f4</color>
 </resources>

@@ -4,6 +4,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <data>
+
     <variable
       name="mItemFragmentViewModel"
       type="com.example.pokedexapplication.viewModel.ItemFragmentViewModel" />
@@ -17,24 +18,31 @@
       android:id="@+id/rcvMove"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      app:bindItemData="@{mItemFragmentViewModel.itemList}"/>
+      app:bindItemData="@{mItemFragmentViewModel.typeOfSearchIsSearchList ? mItemFragmentViewModel.searchItemList : mItemFragmentViewModel.itemList }" />
+
+    <include
+      layout="@layout/no_item_found_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_centerInParent="true"
+      app:goneUnless="@{mItemFragmentViewModel.typeOfSearchIsSearchList ? mItemFragmentViewModel.searchItemList[0].size() == 0 : mItemFragmentViewModel.itemList[0].size() == 0 }" />
 
     <RelativeLayout
       android:layout_width="@dimen/dimen_progress_bar_loading_container_width"
       android:layout_height="@dimen/dimen_progress_bar_loading_container_height"
       android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
       android:background="@drawable/background_progress_bar_loading_container"
-      app:goneUnlessWithSlideAnimation="@{mItemFragmentViewModel.isLoading}"
-      android:layout_centerHorizontal="true">
+      app:goneUnlessWithSlideAnimation="@{mItemFragmentViewModel.isLoading}">
 
       <ProgressBar
         android:id="@+id/pbPokemonLoading"
         android:layout_width="@dimen/dimen_circular_progress_bar_size"
         android:layout_height="@dimen/dimen_circular_progress_bar_size"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/dimen_spacing__xs"
-        android:layout_centerHorizontal="true"/>
+        android:layout_margin="@dimen/dimen_spacing__xs" />
     </RelativeLayout>
   </RelativeLayout>
 </layout>

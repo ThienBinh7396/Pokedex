@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="mPokemonDetailViewModel"
+      type="com.example.pokedexapplication.viewModel.PokemonDetailViewModel" />
+  </data>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_detail_activity">
+
+    <ProgressBar
+      android:layout_width="@dimen/dimen_circular_progress_bar_size__xl"
+      android:layout_height="@dimen/dimen_circular_progress_bar_size__xl"
+      android:layout_centerInParent="true"
+      android:indeterminateTint="@color/colorWhite"
+      app:goneUnlessWithFadeAnimation="@{mPokemonDetailViewModel.isLoading}"
+      tools:targetApi="lollipop" />
+
+
+    <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="@dimen/dimen_pokemon_detail_margin_top"
+      android:nestedScrollingEnabled="true"
+      app:goneUnlessWithFadeAnimation="@{!mPokemonDetailViewModel.isLoading}"
+      tools:targetApi="lollipop">
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dimen_spacing__xl">
+
+        <ImageView
+          android:id="@+id/imvMoveType"
+          android:layout_width="@dimen/dimen_pokemon_detail_image_size"
+          android:layout_height="@dimen/dimen_pokemon_detail_image_height"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="@dimen/dimen_pokemon_detail_image_pokemon_margin_top"
+          android:translationZ="2dp"
+          app:bindImageSrc="@{mPokemonDetailViewModel.pokemon.image}"
+          tools:targetApi="lollipop" />
+
+        <LinearLayout
+          android:id="@+id/llContent"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/imvMoveType"
+          android:layout_alignParentBottom="true"
+          android:layout_marginTop="@dimen/dimen_pokemon_detail_margin_top"
+          android:background="@drawable/background_content_fragment_detail_full_corner"
+          android:gravity="center_horizontal"
+          android:orientation="vertical"
+          android:paddingHorizontal="@dimen/dimen_spacing"
+          android:paddingTop="@dimen/dimen_pokemon_detail_content_padding_top">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_spacing__md"
+            android:text="@{mPokemonDetailViewModel.pokemon.name}"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="@dimen/dimen_fragment_move_detail_title_font_size" />
+
+          <ImageView
+            android:layout_width="115dp"
+            android:layout_height="40dp"
+            app:bindImageSrc="@{@drawable/water_type_btn}" />
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_spacing__lg"
+            android:lineSpacingExtra="4dp"
+            android:text="@{mPokemonDetailViewModel.pokemon.description}"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="@dimen/dimen_pokemon_detail_description_font_size" />
+
+          <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tlStatInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/dimen_spacing"
+            android:background="@color/colorTransparent"
+            app:tabIndicator="@drawable/background_pokemon_stat_tab_active"
+            app:tabIndicatorColor="#559edf"
+            app:tabIndicatorGravity="center"
+            app:tabIndicatorHeight="34dp"
+            app:tabSelectedTextColor="@color/colorWhite"
+            app:tabTextColor="#559edf"
+            tools:targetApi="lollipop" />
+
+          <com.example.pokedexapplication.adapter.viewPager.DynamicHeightViewPager
+            android:id="@+id/vpPokemonStats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
+      </RelativeLayout>
+    </ScrollView>
+  </RelativeLayout>
+</layout>

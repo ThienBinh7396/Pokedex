@@ -1,4 +1,4 @@
-package com.example.pokedexapplication.adapter.ViewPager
+package com.example.pokedexapplication.adapter.viewPager
 
 import android.util.Log
 import androidx.fragment.app.Fragment

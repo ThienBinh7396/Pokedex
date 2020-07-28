@@ -27,7 +27,7 @@
         android:id="@+id/tvAppBarTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dimen_spacing__xs"
+        android:layout_marginBottom="@dimen/dimen_main_app_bar_title_space"
         android:text="@{mAppStateViewModel.titleMainActivity}"
         android:textAlignment="center"
         android:textSize="@dimen/main_app_bar_title" />
@@ -35,16 +35,6 @@
       <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <ImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentStart="true"
-          android:layout_centerVertical="true"
-          android:layout_marginStart="@dimen/dimen_spacing"
-          android:layout_marginTop="@dimen/dimen_spacing__xs"
-          android:clickable="false"
-          android:src="@drawable/ic_baseline_search_24" />
 
         <EditText
           android:id="@+id/edtSearch"
@@ -64,6 +54,15 @@
           android:textSize="@dimen/dimen_search_box_text_size" />
 
         <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentStart="true"
+          android:layout_marginStart="@dimen/dimen_spacing"
+          android:layout_marginTop="@dimen/dimen_spacing__sm"
+          android:clickable="false"
+          android:src="@drawable/ic_baseline_search_24" />
+
+        <ImageView
           android:id="@+id/imvGoSearch"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
@@ -73,6 +72,8 @@
           android:clickable="false"
           android:focusable="true"
           android:onClick="@{() -> mAppStateViewModel.editextEventListener.onGotoSearchClickListener()}"
+          android:scaleX="1.2"
+          android:scaleY="1.2"
           android:src="@drawable/ic_baseline_arrow_right_alt_24"
           android:tint="@{mAppStateViewModel.checkSearchQueryIsBlank() ? @color/colorTextThird : @color/colorTextSecondary }" />
 
@@ -80,11 +81,13 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_centerVertical="true"
-          android:layout_marginEnd="@dimen/dimen_spacing__xs"
+          android:layout_marginEnd="@dimen/dimen_spacing__sm"
           android:layout_toStartOf="@id/imvGoSearch"
           android:clickable="false"
           android:focusable="true"
           android:onClick="@{() -> mAppStateViewModel.editextEventListener.onClearClickListener()}"
+          android:scaleX="1.2"
+          android:scaleY="1.2"
           android:src="@drawable/ic_baseline_clear_24"
           android:tint="@{mAppStateViewModel.checkSearchQueryIsBlank() ? @color/colorTextThird : @color/colorTextSecondary }" />
       </RelativeLayout>

@@ -19,6 +19,9 @@
     </item>
   </style>
 
+  <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
+    <item name="android:textSize">12sp</item>
+  </style>
 
   <style name="PokemonInformationDialogAnimation">
     <item name="android:windowEnterAnimation">@anim/enter_pokemon_dialog_content_anim</item>

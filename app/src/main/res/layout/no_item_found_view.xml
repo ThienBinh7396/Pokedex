@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <ImageView
+      android:id="@+id/imvNotFound"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:layout_marginTop="-42dp"
+      android:src="@drawable/no_products_found" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/imvNotFound"
+      android:layout_marginTop="@dimen/dimen_spacing__xs"
+      android:text="@string/item_not_found"
+      android:textAlignment="center"
+      android:textAllCaps="true"
+      android:textColor="#a3a3a3"
+      android:textSize="22sp" />
+  </RelativeLayout>
+
+</layout>

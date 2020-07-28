@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="mMoveViewModel"
+      type="com.example.pokedexapplication.viewModel.MoveViewModel" />
+  </data>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_detail_activity">
+
+    <ImageView
+      android:id="@+id/imvMoveType"
+      android:layout_width="@dimen/dimen_move_detail_image_move_size"
+      android:layout_height="@dimen/dimen_move_detail_image_move_size"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="@dimen/dimen_fragment_move_detail_content_top_margin"
+      android:translationZ="2dp"
+      app:bindTypePokemonLgSrc="@{mMoveViewModel.type}"
+      tools:targetApi="lollipop" />
+
+    <LinearLayout
+      android:id="@+id/llContent"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/imvMoveType"
+      android:layout_marginTop="@dimen/dimen_move_detail_image_move_margin_top"
+      android:background="@drawable/background_content_fragment_detail"
+      android:gravity="center_horizontal"
+      android:orientation="vertical"
+      android:paddingHorizontal="@dimen/dimen_spacing"
+      android:paddingTop="@dimen/dimen_fragment_move_detail_content_top_padding">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_spacing__md"
+        android:text="@{mMoveViewModel.name}"
+        android:textAlignment="center"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="@dimen/dimen_fragment_move_detail_title_font_size" />
+
+      <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:background="@drawable/background_pokemon_type_button_round"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/dimen_spacing__xs"
+        android:paddingEnd="@dimen/dimen_spacing__xl"
+        app:bindTypePokemonBackgroundTint="@{mMoveViewModel.type}">
+
+        <RelativeLayout
+          android:id="@+id/rlIconType"
+          android:layout_width="@dimen/dimen_pokemon_image_pokemon_type_size_sm"
+          android:layout_height="@dimen/dimen_pokemon_image_pokemon_type_size_sm"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentTop="true"
+          android:layout_alignParentBottom="true">
+
+          <ImageView
+            android:id="@+id/imvIconType"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_centerInParent="true"
+            app:bindTypePokemonSrc="@{mMoveViewModel.type}" />
+        </RelativeLayout>
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:layout_toEndOf="@+id/rlIconType"
+          android:text="@{mMoveViewModel.type}"
+          android:textColor="@color/colorWhite"
+          android:textSize="14sp"
+          android:textStyle="bold" />
+      </RelativeLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_spacing__lg"
+        android:lineSpacingExtra="2dp"
+        android:text="@{mMoveViewModel.effects}"
+        android:textAlignment="center"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="@dimen/dimen_move_detail_effect_font_size" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_move_detail_stat_margin_top"
+        android:weightSum="3">
+
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:orientation="vertical"
+          android:paddingVertical="@dimen/dimen_spacing__xs">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_move_detail_label_margin_bottom"
+            android:text="@string/base_power"
+            android:textAlignment="center"
+            android:textColor="@color/colorLabelBase"
+            android:textSize="@dimen/dimen_move_detail_label_size" />
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{mMoveViewModel.powerText}"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="@dimen/dimen_move_detail_label_stat_size" />
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="@drawable/background_with_left_right_border"
+          android:orientation="vertical"
+          android:paddingVertical="@dimen/dimen_spacing__xs">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_move_detail_label_margin_bottom"
+            android:text="@string/accurary"
+            android:textAlignment="center"
+            android:textColor="@color/colorLabelBase"
+            android:textSize="@dimen/dimen_move_detail_label_size" />
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{mMoveViewModel.accuracyText}"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="@dimen/dimen_move_detail_label_stat_size" />
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:orientation="vertical"
+          android:paddingVertical="@dimen/dimen_spacing__xs">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_move_detail_label_margin_bottom"
+            android:text="@string/pp"
+            android:textAlignment="center"
+            android:textColor="@color/colorLabelBase"
+            android:textSize="@dimen/dimen_move_detail_label_size" />
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{mMoveViewModel.ppText}"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="@dimen/dimen_move_detail_label_stat_size" />
+        </LinearLayout>
+
+      </LinearLayout>
+    </LinearLayout>
+  </RelativeLayout>
+</layout>

@@ -1,13 +1,12 @@
 package com.example.pokedexapplication.viewModel
 
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BaseObservable
 import androidx.databinding.BindingAdapter
 import com.example.pokedexapplication.BR
 import com.example.pokedexapplication.GlideApp
-import com.example.pokedexapplication.adapter.ViewPager.MainViewPagerAdapter.Companion.MAIN_NAV_TABS
+import com.example.pokedexapplication.adapter.viewPager.MainViewPagerAdapter.Companion.MAIN_NAV_TABS
 
 class MainNavTabLayoutViewModel : BaseObservable() {
   private var isSelected: Boolean = false

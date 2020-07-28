@@ -1,7 +1,7 @@
 package com.example.pokedexapplication.Store.State
 
-import com.example.pokedexapplication.Model.Pokemon
-import com.example.pokedexapplication.Model.PokemonDetail
+import com.example.pokedexapplication.model.Pokemon
+import com.example.pokedexapplication.model.PokemonDetail
 import org.rekotlin.StateType
 
 data class PokemonState(

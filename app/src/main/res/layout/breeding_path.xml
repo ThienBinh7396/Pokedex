@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="pokemonBreeding"
+      type="com.example.pokedexapplication.model.PokemonBreeding" />
+  </data>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="@dimen/dimen_spacing__md"
+      android:layout_marginBottom="@dimen/dimen_spacing__xs"
+      android:text="@string/breeding_text"
+      android:textColor="@color/colorLabelBase"
+      android:textSize="@dimen/dimen_pokemon_stat_label_font" />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/dimen_move_detail_stat_margin_top"
+      android:weightSum="3">
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/dimen_spacing__xs">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/dimen_spacing"
+          android:text="@string/egg_group_text"
+          android:textAlignment="center"
+          android:textColor="@color/colorLabelBase"
+          android:textSize="@dimen/dimen_move_detail_label_size_lg" />
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:bindStringList="@{pokemonBreeding.eggGroup}" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/background_with_left_right_border"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/dimen_spacing__xs">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/dimen_spacing"
+          android:text="@string/hatch_time_text"
+          android:textAlignment="center"
+          android:textColor="@color/colorLabelBase"
+          android:textSize="@dimen/dimen_move_detail_label_size_lg" />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/dimen_spacing__xs"
+          android:textAlignment="center"
+          android:textColor="@color/colorTextSecondary"
+          android:textSize="16sp"
+          app:bindStepsText="@{pokemonBreeding.hatchTime.steps}" />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/dimen_spacing__xs"
+          android:textAlignment="center"
+          android:textColor="@color/colorTextSecondary"
+          android:textSize="16sp"
+          app:bindCyclesText="@{pokemonBreeding.hatchTime.cycles}" />
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/dimen_spacing__xs">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/dimen_spacing"
+          android:text="@string/gender_text"
+          android:textAlignment="center"
+          android:textColor="@color/colorLabelBase"
+          android:textSize="@dimen/dimen_move_detail_label_size_lg" />
+
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:weightSum="2">
+
+          <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textAlignment="center"
+              android:textColor="@color/colorMale"
+              app:bindPercentText="@{(100f - pokemonBreeding.femaleGender)}" />
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textAlignment="center"
+              android:textColor="@color/colorFemale"
+              app:bindPercentText="@{pokemonBreeding.femaleGender}" />
+          </LinearLayout>
+
+          <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+
+            <ProgressBar
+              style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+              android:layout_width="40dp"
+              android:layout_height="40dp"
+              android:layout_centerInParent="true"
+              android:background="@drawable/background_progress_bar_gender_shape"
+              android:indeterminate="false"
+              android:max="100"
+              android:progressDrawable="@drawable/background_progress_bar_gender"
+              app:bindProgressValue="@{(100f - pokemonBreeding.femaleGender)}"
+              tools:targetApi="lollipop" />
+
+            <ImageView
+              android:layout_width="22dp"
+              android:layout_height="22dp"
+              android:layout_centerInParent="true"
+              android:scaleType="fitCenter"
+              android:src="@drawable/gender_icon" />
+          </RelativeLayout>
+        </LinearLayout>
+      </LinearLayout>
+
+    </LinearLayout>
+  </LinearLayout>
+</layout>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="isCollapsed"
+      type="Boolean" />
+
+    <variable
+      name="mPokemonDetailViewModel"
+      type="com.example.pokedexapplication.viewModel.PokemonDetailViewModel" />
+  </data>
+
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_detail_activity"
+    android:elevation="0.1dp"
+    android:orientation="vertical"
+    tools:targetApi="lollipop">
+
+    <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/main_appbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorTransparent"
+      android:fitsSystemWindows="true"
+      app:goneUnlessWithFadeAnimation="@{!mPokemonDetailViewModel.isLoading}"
+      tools:targetApi="lollipop">
+
+      <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="36dp"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        app:titleEnabled="false">
+
+        <RelativeLayout
+          android:id="@+id/content_slide_when_scroll"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+          <ImageView
+            android:id="@+id/imvMoveType"
+            android:layout_width="@dimen/dimen_pokemon_detail_image_size"
+            android:layout_height="@dimen/dimen_pokemon_detail_image_height"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dimen_pokemon_detail_image_pokemon_margin_top"
+            android:translationZ="2dp"
+            app:bindImageSrc="@{mPokemonDetailViewModel.pokemon.image}" />
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imvMoveType"
+            android:layout_marginTop="-32dp"
+            android:background="@drawable/background_content_fragment_detail"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dimen_spacing__lg"
+            android:paddingBottom="@dimen/dimen_spacing__sm">
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+              android:layout_marginBottom="@dimen/dimen_spacing__md"
+              android:text="@{mPokemonDetailViewModel.pokemon.name}"
+              android:textAlignment="center"
+              android:textColor="@color/colorTextSecondary"
+              android:textSize="@dimen/dimen_fragment_move_detail_title_font_size" />
+
+            <ImageView
+              android:layout_width="115dp"
+              android:layout_height="40dp"
+              android:layout_gravity="center_horizontal"
+              app:bindImageSrc="@{@drawable/water_type_btn}" />
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+              android:layout_marginTop="@dimen/dimen_spacing__lg"
+              android:lineSpacingExtra="4dp"
+              android:text="@{mPokemonDetailViewModel.pokemon.description}"
+              android:textAlignment="center"
+              android:textColor="@color/colorTextSecondary"
+              android:textSize="@dimen/dimen_pokemon_detail_description_font_size" />
+
+          </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+          android:id="@+id/tvTitleOnCollapsed"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom|center"
+          android:gravity="center"
+          android:text="@{mPokemonDetailViewModel.pokemon.name}"
+          android:textAlignment="center"
+          android:textColor="@color/colorWhite"
+          android:textSize="20dp"
+          app:layout_collapseMode="pin" />
+
+      </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+      <LinearLayout
+        android:id="@+id/tlStatInformationContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/dimen_spacing__lg"
+        android:paddingVertical="12dp"
+        app:bindBackgroundCollapsedView="@{isCollapsed}">
+
+        <com.google.android.material.tabs.TabLayout
+          android:id="@+id/tlStatInformation"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:tabIndicator="@drawable/background_pokemon_stat_tab_active"
+          app:tabIndicatorColor="#559edf"
+          app:tabIndicatorGravity="center"
+          app:tabIndicatorHeight="34dp"
+          app:tabSelectedTextColor="@color/colorWhite"
+          app:tabTextColor="#559edf"
+          tools:targetApi="lollipop" />
+      </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/colorBackground"
+      android:fillViewport="true"
+      app:goneUnlessWithFadeAnimation="@{!mPokemonDetailViewModel.isLoading}"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+      <com.example.pokedexapplication.adapter.viewPager.DynamicHeightViewPager
+        android:id="@+id/vpPokemonStats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_spacing__xl" />
+
+    </androidx.core.widget.NestedScrollView>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

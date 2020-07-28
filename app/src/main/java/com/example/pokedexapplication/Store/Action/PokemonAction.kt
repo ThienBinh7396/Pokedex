@@ -1,7 +1,7 @@
 package com.example.pokedexapplication.Store.Action
 
-import com.example.pokedexapplication.Model.ListPokemonResponse
-import com.example.pokedexapplication.Model.PokemonDetail
+import com.example.pokedexapplication.model.ListPokemonResponse
+import com.example.pokedexapplication.model.PokemonDetail
 import org.rekotlin.Action
 
 sealed class PokemonAction : Action {

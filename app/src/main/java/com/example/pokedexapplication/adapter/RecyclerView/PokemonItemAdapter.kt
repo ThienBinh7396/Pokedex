@@ -1,19 +1,16 @@
 package com.example.pokedexapplication.adapter.RecyclerView
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pokedexapplication.Model.Pokemon
+import com.example.pokedexapplication.model.Pokemon
 import com.example.pokedexapplication.R
-import com.example.pokedexapplication.databinding.FragmentPokemonBinding
 import com.example.pokedexapplication.databinding.PokemonItemBinding
-import com.example.pokedexapplication.databinding.PokemonTypeItemBinding
-import com.example.pokedexapplication.viewModel.PokemonFragmentViewModel
-import com.example.pokedexapplication.viewModel.PokemonTypeViewModel
 import com.example.pokedexapplication.viewModel.PokemonViewModel
+
 
 class PokemonItemAdapter(var eventLintener: PokemonItemEventListener) :
   RecyclerView.Adapter<PokemonItemAdapter.PokemonItemViewHolder>() {
@@ -45,6 +42,7 @@ class PokemonItemAdapter(var eventLintener: PokemonItemEventListener) :
         (mPokemonItemBinding.mPokemonViewModel as PokemonViewModel).setPokemonData(pokemonItem)
       }
     }
+
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonItemViewHolder {
@@ -62,9 +60,14 @@ class PokemonItemAdapter(var eventLintener: PokemonItemEventListener) :
   }
 
   fun updatePokemonList(_pokemonList: MutableList<Pokemon>, refresh: Boolean = true) {
+
+    val diffCallback = PokemonDiffCallback(pokemonList, _pokemonList)
+    val diffResult = DiffUtil.calculateDiff(diffCallback)
+
     if (refresh) pokemonList.clear()
     pokemonList.addAll(_pokemonList.toList())
-    notifyDataSetChanged()
+
+    diffResult.dispatchUpdatesTo(this)
   }
 
   fun updateIndexSelected(index: Int) {
@@ -85,5 +88,19 @@ class PokemonItemAdapter(var eventLintener: PokemonItemEventListener) :
 
   interface PokemonItemEventListener {
     fun onItemClickListener(position: Int, pokemonId: String)
+  }
+
+  class PokemonDiffCallback(var oldList: MutableList<Pokemon>, var newList: MutableList<Pokemon>) :
+    DiffUtil.Callback() {
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+      oldList[oldItemPosition].id == newList[newItemPosition].id
+
+    override fun getOldListSize(): Int = oldList.size
+
+    override fun getNewListSize(): Int = newList.size
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+      oldList[oldItemPosition].id == newList[newItemPosition].id
   }
 }

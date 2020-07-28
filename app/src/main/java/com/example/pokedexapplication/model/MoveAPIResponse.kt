@@ -1,4 +1,4 @@
-package com.example.pokedexapplication.Model
+package com.example.pokedexapplication.model
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -15,7 +15,9 @@ data class Move(
   @SerializedName("pp")
   var pp: Int = 0,
   @SerializedName("type")
-  var type: String = "NORMAL"
+  var type: String = "NORMAL",
+  @SerializedName("level")
+  var level: Int?
 ) : Serializable
 
 data class ListMoveResponse(

@@ -1,13 +1,10 @@
 package com.example.pokedexapplication.viewModel
 
-import android.util.Log
 import androidx.databinding.BaseObservable
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableArrayList
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pokedexapplication.Model.Pokemon
 import com.example.pokedexapplication.adapter.RecyclerView.PokemonTypeItemAdapter
-import java.util.*
 
 class PokemonTypeViewModel: BaseObservable() {
   private var mPokemonType = ObservableArrayList<MutableList<String>>()

@@ -1,13 +1,11 @@
 package com.example.pokedexapplication.viewModel
 
-import android.util.Log
 import android.view.View
 import androidx.databinding.BaseObservable
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableArrayList
-import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pokedexapplication.Model.Pokemon
+import com.example.pokedexapplication.model.Pokemon
 import com.example.pokedexapplication.R
 import com.example.pokedexapplication.adapter.RecyclerView.PokemonTypeItemAdapter
 

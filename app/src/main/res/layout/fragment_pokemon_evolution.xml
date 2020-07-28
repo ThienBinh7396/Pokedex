@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="mPokemonDetailViewModel"
+      type="com.example.pokedexapplication.viewModel.PokemonDetailViewModel" />
+  </data>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/dimen_viewpager_pokemon_stat_min_height">
+
+    <ProgressBar
+      android:layout_width="@dimen/dimen_circular_progress_bar_size__xl"
+      android:layout_height="@dimen/dimen_circular_progress_bar_size__xl"
+      android:layout_centerInParent="true"
+      app:goneUnlessWithFadeAnimation="@{mPokemonDetailViewModel.isLoading}"
+      tools:targetApi="lollipop" />
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rcvEvolutions"
+      android:layout_marginBottom="@dimen/dimen_spacing__xl"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:nestedScrollingEnabled="false"
+      android:overScrollMode="never"
+      app:bindEvolutionsList="@{mPokemonDetailViewModel.evolutions}"
+      tools:targetApi="lollipop" />
+  </RelativeLayout>
+</layout>

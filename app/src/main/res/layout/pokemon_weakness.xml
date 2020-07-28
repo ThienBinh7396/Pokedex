@@ -15,7 +15,7 @@
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:paddingHorizontal="@dimen/dimen_spacing__sm"
-    android:paddingVertical="6dp">
+    android:paddingVertical="@dimen/dimen_spacing__sm">
 
     <ImageView
       android:layout_width="@dimen/dimen_pokemon_image_pokemon_type_size_sm"

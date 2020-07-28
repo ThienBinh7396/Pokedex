@@ -12,6 +12,9 @@
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:onClick="@{() -> mItemViewModel.itemEventListener.onItemClickListener(mItemViewModel.item)}"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/dimen_spacing">
 
@@ -41,10 +44,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/dimen_spacing__xs"
         android:text="@{mItemViewModel.price}"
         android:textColor="@color/colorTextThird"
-        android:textSize="@dimen/dimen_pokemon_recycleview_price_font"
-        android:layout_marginEnd="@dimen/dimen_spacing__xs"/>
+        android:textSize="@dimen/dimen_pokemon_recycleview_price_font" />
 
       <TextView
         android:layout_width="wrap_content"

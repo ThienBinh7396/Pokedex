@@ -23,6 +23,13 @@
       android:layout_marginBottom="@dimen/dimen_spacing__xs"
       app:bindPokemonData="@{mPokemonFragmentViewModel.typeOfPokemonsIsSearchList ? mPokemonFragmentViewModel.searchPokemonList : mPokemonFragmentViewModel.pokemonList }" />
 
+    <include
+      layout="@layout/no_item_found_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_centerInParent="true"
+      app:goneUnless="@{mPokemonFragmentViewModel.typeOfPokemonsIsSearchList ? mPokemonFragmentViewModel.searchPokemonList[0].size() == 0 : mPokemonFragmentViewModel.pokemonList[0].size() == 0 }" />
+
     <RelativeLayout
       android:layout_width="@dimen/dimen_progress_bar_loading_container_width"
       android:layout_height="@dimen/dimen_progress_bar_loading_container_height"

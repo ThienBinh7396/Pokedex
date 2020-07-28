@@ -1,6 +1,8 @@
 package com.example.pokedexapplication.common
 
+import android.content.Context
 import android.util.Log
+import android.view.View
 import java.lang.StringBuilder
 import java.text.DecimalFormat
 import kotlin.math.pow
@@ -51,6 +53,15 @@ class NumberUtils {
         number,
         amountDecimalPart
       )
+    }
+
+    fun covertDpToPixels(context: Context, dp: Int): Float {
+      val scale = context.resources.displayMetrics.scaledDensity
+      return dp * scale
+    }
+    fun covertPixelToDpTo(context: Context, pixel: Float): Float {
+      val scale = context.resources.displayMetrics.scaledDensity
+      return pixel / scale
     }
   }
 }
